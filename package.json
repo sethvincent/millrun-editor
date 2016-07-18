@@ -1,0 +1,35 @@
+{
+  "name": "millrun-editor",
+  "version": "1.0.0",
+  "description": "simple markdown editor",
+  "main": "index.js",
+  "scripts": {
+    "start": "budo --dir example example/index.js:bundle.js"
+  },
+  "browserify": {
+    "transform": ["sheetify/transform"]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sethvincent/millrun-editor.git"
+  },
+  "keywords": [
+    "markdown",
+    "editor",
+    "codemirror"
+  ],
+  "author": "sethvincent",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sethvincent/millrun-editor/issues"
+  },
+  "homepage": "https://github.com/sethvincent/millrun-editor#readme",
+  "dependencies": {
+    "codemirror": "^5.16.0",
+    "sheetify": "^5.0.3",
+    "yo-yo": "^1.2.2"
+  },
+  "devDependencies": {
+    "budo": "^8.3.0"
+  }
+}
