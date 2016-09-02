@@ -1,5 +1,9 @@
+html, body {
+  background-color: #fcfcfa;
+}
+
 .CodeMirror {
-  font-family: "Fira Code", monospace;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, sans-serif;
   height: 100%;
 }
 

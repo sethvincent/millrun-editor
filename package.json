@@ -7,7 +7,9 @@
     "start": "budo --dir example example/index.js:bundle.js"
   },
   "browserify": {
-    "transform": ["sheetify/transform"]
+    "transform": [
+      "sheetify/transform"
+    ]
   },
   "repository": {
     "type": "git",
@@ -26,7 +28,11 @@
   "homepage": "https://github.com/sethvincent/millrun-editor#readme",
   "dependencies": {
     "codemirror": "^5.16.0",
+    "marked": "^0.3.6",
+    "newline-remove": "^1.0.2",
+    "remove-markdown": "^0.1.0",
     "sheetify": "^5.0.3",
+    "wordcount": "^1.1.1",
     "yo-yo": "^1.2.2"
   },
   "devDependencies": {

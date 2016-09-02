@@ -1,3 +1,4 @@
+var assert = require('assert')
 var html = require('yo-yo')
 var css = require('sheetify')
 var codemirror = require('codemirror')
@@ -9,8 +10,11 @@ require('codemirror/mode/gfm/gfm')
 require('codemirror/mode/xml/xml')
 require('codemirror/mode/htmlmixed/htmlmixed')
 
+var format = require('./format')
+
 module.exports = function createEditor (options) {
-  css('codemirror/lib/codemirror.css')
+  
+  css('codemirror/lib/codemirror.css', { global: true })
   css('./style.css', { global: true })
 
   var prefix = css`
@@ -34,17 +38,42 @@ module.exports = function createEditor (options) {
     extraKeys: { 'Enter': 'newlineAndIndentContinueMarkdownList' }
   })
 
-  function render (state, send) {
-    var element = html`<div class="editor-wrapper ${prefix}" onload=${onload}>
+  function render (params) {
+    assert.ok(params)
+    assert.ok(params.onChange)
+    var onChange = params.onChange
+
+    var element = html`<div class="editor-wrapper ${prefix}" onload=${onload} onunload=${onunload}>
       ${el}
     </div>`
 
-    function onload (el) {
-      editor.setValue(state.content)
-      editor.on('change', function () {
-        send('editor:change', { content: editor.getValue() })
-      })
+    function change () {
+      var value = editor.getValue()
+      if (value.length) {
+        onChange(format({
+          key: params.key,
+          value: value,
+          firstLine: editor.getLine(0),
+          lineCount: editor.lineCount()
+        }))
+      }
     }
+
+    function onload (el) {
+      editor.on('change', change)
+    }
+
+    function onunload (el) {
+      editor.off('change', change)
+    }
+
+    if (params.content) {
+      editor.setValue(params.content)
+    }
+
+    setTimeout(function () {
+      editor.refresh()
+    }, 0)
 
     editor.containerEl = element
     return element
