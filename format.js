@@ -25,7 +25,7 @@ module.exports = function formatDraft (options) {
   var draft = {
     title: title,
     markdown: value,
-    html: md.render(value),
+    html: md(value),
     slug: title.replace(' ', '-'),
     word_count: wordCount(text),
     character_count: text.length,
